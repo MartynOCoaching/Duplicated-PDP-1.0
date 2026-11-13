@@ -1,0 +1,606 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-850: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  --color-emerald-50: #ecfeff;
+  --color-emerald-100: #cffafe;
+  --color-emerald-200: #a5f3fc;
+  --color-emerald-300: #67e8f9;
+  --color-emerald-400: #00bbff;
+  --color-emerald-500: #00bbff;
+  --color-emerald-600: #009be0;
+  --color-emerald-700: #007bb5;
+  --color-emerald-800: #005c8a;
+  --color-emerald-900: #003e5e;
+  --color-emerald-950: #001f30;
+}
+
+/* Base custom resets */
+html,
+body,
+#root {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Mobile fit: stop phones from rescaling text on their own, and avoid the
+   double-tap zoom delay. Pinch-zoom still works for accessibility. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+/* iPhone Safari zooms into any focused field whose text is under 16px and then
+   stays zoomed in. Keeping fields at 16px on phones prevents the page from
+   becoming larger than the screen after a tap. */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+html,
+body,
+#root,
+.bg-slate-950 {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Widget backgrounds: white panels */
+.bg-slate-900,
+.bg-slate-900\/50,
+.bg-slate-900\/20,
+.bg-slate-900\/80,
+.bg-slate-900\/95,
+main .bg-slate-900,
+main .bg-slate-950,
+main .bg-slate-950\/80,
+main .bg-slate-950\/60,
+main .bg-slate-950\/40,
+input,
+select,
+textarea,
+select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Inputs: subtle border + light fill */
+input,
+select,
+textarea,
+select option {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Text colors */
+.text-slate-100,
+.text-slate-200,
+.text-slate-350 {
+  color: #0f172a !important;
+}
+
+.text-slate-300 {
+  color: #334155 !important;
+}
+
+.text-slate-400,
+.text-slate-450,
+.text-slate-404,
+.text-slate-405 {
+  color: #64748b !important;
+}
+
+.text-slate-500 {
+  color: #64748b !important;
+}
+
+.text-slate-700 {
+  color: #94a3b8 !important;
+}
+
+/* Accent color for icons and highlights */
+svg,
+.text-emerald-400,
+.text-emerald-450,
+.text-emerald-300 {
+  color: #00bbff !important;
+}
+
+svg path,
+svg circle,
+svg rect,
+svg line,
+svg polyline,
+svg polygon {
+  stroke: #00bbff !important;
+}
+
+/* Preserve specific icon colors where needed */
+svg.text-amber-400,
+svg.text-rose-500,
+svg.text-rose-400,
+svg.text-sky-400 {
+  color: #00bbff !important;
+}
+svg.text-amber-400 *,
+svg.text-rose-500 *,
+svg.text-rose-400 *,
+svg.text-sky-400 * {
+  stroke: #00bbff !important;
+}
+
+/* Highlighted boxes: light blue tint with blue border */
+.bg-emerald-500\/5,
+.bg-emerald-500\/10,
+.bg-emerald-500\/15,
+.bg-emerald-950\/30,
+.bg-emerald-500\/20,
+.bg-emerald-950\/50,
+.bg-emerald-950\/70,
+.p-2\.5.bg-emerald-500\/10,
+.px-3.py-1.bg-emerald-500\/15,
+.bg-sky-400\/10,
+.bg-amber-500\/10,
+.bg-rose-950\/30,
+.bg-emerald-950\/30 {
+  background-color: rgba(0, 187, 255, 0.08) !important;
+  border: 1px solid rgba(0, 187, 255, 0.35) !important;
+  border-radius: 0.75rem !important;
+}
+
+/* Primary buttons: blue pill */
+.bg-emerald-500,
+.bg-emerald-600,
+button[class*="bg-emerald-500"],
+button[class*="bg-emerald-600"],
+button.bg-emerald-500,
+button.bg-emerald-600,
+input[type="submit"] {
+  background-color: #00bbff !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+
+/* Coach registration widget: rose, matching the club/team registration buttons.
+   Scoped to the id so the generic submit-button rule above cannot tint it blue. */
+button#btn-provision-coach {
+  background-color: #e11d48 !important;
+  color: #ffffff !important;
+}
+
+button#btn-provision-coach:hover:not(:disabled) {
+  background-color: #be123c !important;
+}
+
+button#btn-provision-coach:disabled {
+  background-color: #fecdd3 !important;
+  color: #9f1239 !important;
+  opacity: 1 !important;
+}
+
+/* Team registration widget: keep the softer corner shape used by the club and
+   coach registration buttons. The generic submit-button rule above forces a
+   fully rounded pill on this button because its class contains bg-emerald-600. */
+button#btn-provision-team {
+  border-radius: 0.5rem !important;
+}
+
+/* Button icons: visible dark-sky blue */
+button svg,
+button svg path,
+button svg circle,
+button svg rect,
+button svg line,
+button svg polyline,
+button svg polygon {
+  color: #0369a1 !important;
+  stroke: #0369a1 !important;
+}
+
+/* Mobile hamburger / close menu icons */
+button[aria-label="Toggle navigation menu"] svg,
+button[aria-label="Toggle navigation menu"] svg path,
+button[aria-label="Toggle navigation menu"] svg line,
+button[aria-label="Toggle navigation menu"] svg polyline {
+  color: #475569 !important;
+  stroke: #475569 !important;
+}
+
+/* Exception: inline action buttons (edit/delete) keep visible slate/rose icons */
+button.inline-icon-btn svg,
+button.inline-icon-btn svg path,
+button.inline-icon-btn svg circle,
+button.inline-icon-btn svg rect,
+button.inline-icon-btn svg line,
+button.inline-icon-btn svg polyline,
+button.inline-icon-btn svg polygon {
+  color: #64748b !important;
+  stroke: #64748b !important;
+}
+
+button.inline-icon-btn:hover svg,
+button.inline-icon-btn:hover svg path,
+button.inline-icon-btn:hover svg circle,
+button.inline-icon-btn:hover svg rect,
+button.inline-icon-btn:hover svg line,
+button.inline-icon-btn:hover svg polyline,
+button.inline-icon-btn:hover svg polygon {
+  color: #009be0 !important;
+  stroke: #009be0 !important;
+}
+
+button.inline-icon-btn.inline-delete-btn:hover svg,
+button.inline-icon-btn.inline-delete-btn:hover svg path,
+button.inline-icon-btn.inline-delete-btn:hover svg circle,
+button.inline-icon-btn.inline-delete-btn:hover svg rect,
+button.inline-icon-btn.inline-delete-btn:hover svg line,
+button.inline-icon-btn.inline-delete-btn:hover svg polyline,
+button.inline-icon-btn.inline-delete-btn:hover svg polygon {
+  color: #e11d48 !important;
+  stroke: #e11d48 !important;
+}
+
+.bg-emerald-500:hover,
+.bg-emerald-600:hover,
+button[class*="bg-emerald-500"]:hover,
+button[class*="bg-emerald-600"]:hover {
+  background-color: #009be0 !important;
+}
+
+/* Selected/unselected assignment-type selector buttons keep the rectangle
+   with slightly rounded corners; the global pill rule must not reshape them. */
+button.assignment-type-btn {
+  border-radius: 0.375rem !important;
+}
+
+/* Borders: light gray instead of dark */
+.border-slate-800,
+.border-slate-800\/80,
+.border-slate-850,
+.border-slate-855,
+.border-slate-750 {
+  border-color: #e2e8f0 !important;
+}
+
+.border-slate-700 {
+  border-color: #cbd5e1 !important;
+}
+
+/* Nav active states: light blue background with blue text */
+.bg-slate-800 {
+  background-color: #e0f7ff !important;
+}
+
+/* Hover states for nav items */
+.hover\:bg-slate-850:hover,
+.hover\:bg-slate-855:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff !important;
+  border-top: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+/* Scrollbar styling for light theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* -------------------------------------------------------------------------
+   TACTICAL FIELD CANVAS DESIGN-PRESERVATION PRECISE OVERRIDES
+   ------------------------------------------------------------------------- */
+.pitch-canvas-container svg .field-marking-rect,
+.pitch-canvas-container svg .field-marking-circle {
+  stroke: rgba(255, 255, 255, 0.5) !important;
+  fill: none !important;
+}
+
+.pitch-canvas-container svg .field-marking-line,
+.pitch-canvas-container svg .field-marking-path {
+  stroke: rgba(255, 255, 255, 0.5) !important;
+  fill: none !important;
+}
+
+.pitch-canvas-container svg .tactical-line {
+  stroke: var(--line-color, #fbbf24) !important;
+  fill: none !important;
+}
+
+.pitch-canvas-container svg .player-hotspot {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  fill: transparent !important;
+}
+
+.pitch-canvas-container svg .player-selection-ring {
+  stroke: #fbbf24 !important;
+  fill: none !important;
+  stroke-width: 0.8 !important;
+}
+
+.pitch-canvas-container svg .ball-glow-ring {
+  stroke: #eab308 !important;
+  fill: none !important;
+  stroke-width: 0.5 !important;
+}
+
+.pitch-canvas-container svg .ball-shadow {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  fill: rgba(0, 0, 0, 0.3) !important;
+}
+
+.pitch-canvas-container svg .ball-body {
+  stroke: var(--ball-stroke-color, #fbbf24) !important;
+  fill: #ffffff !important;
+}
+
+.pitch-canvas-container svg .ball-marking {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  fill: #334155 !important;
+}
+
+.pitch-canvas-container svg .endpoint-grab-circle {
+  stroke: #00bbff !important;
+  stroke-width: 0.5 !important;
+  fill: var(--endpoint-fill, #1e293b) !important;
+}
+
+/* Status and informational messages use a readable green instead of the primary blue. */
+.text-emerald-400,
+.text-emerald-450,
+.text-emerald-300 {
+  color: #047857 !important;
+}
+
+.bg-emerald-500\/5,
+.bg-emerald-500\/10,
+.bg-emerald-500\/15,
+.bg-emerald-500\/20,
+.bg-emerald-950\/30,
+.bg-emerald-950\/50,
+.bg-emerald-950\/70,
+.p-2\.5.bg-emerald-500\/10,
+.px-3.py-1.bg-emerald-500\/15 {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  border-color: rgba(5, 150, 105, 0.35) !important;
+}
+
+svg.text-emerald-400,
+svg.text-emerald-450,
+svg.text-emerald-300 {
+  color: #047857 !important;
+}
+
+svg.text-emerald-400 path,
+svg.text-emerald-400 circle,
+svg.text-emerald-400 rect,
+svg.text-emerald-400 line,
+svg.text-emerald-400 polyline,
+svg.text-emerald-400 polygon,
+svg.text-emerald-450 path,
+svg.text-emerald-450 circle,
+svg.text-emerald-450 rect,
+svg.text-emerald-450 line,
+svg.text-emerald-450 polyline,
+svg.text-emerald-450 polygon,
+svg.text-emerald-300 path,
+svg.text-emerald-300 circle,
+svg.text-emerald-300 rect,
+svg.text-emerald-300 line,
+svg.text-emerald-300 polyline,
+svg.text-emerald-300 polygon {
+  stroke: #047857 !important;
+}
+
+/* Session plan button: white at rest, sky-200 on hover */
+button.drill-plan-btn {
+  background-color: #ffffff !important;
+}
+
+button.drill-plan-btn:hover {
+  background-color: #bae6fd !important;
+}
+
+/* =========================================================
+   SITE-WIDE SKY THEME
+   Light sky (sky-200 #bae6fd): hover states
+   Dark sky (sky-600 #0284c7): buttons and selected items
+   Icon sky (sky-700 #0369a1): all icons
+   ========================================================= */
+
+/* 1. ICONS: dark sky */
+svg,
+svg.text-emerald-400, svg.text-emerald-450, svg.text-emerald-300,
+svg.text-amber-400, svg.text-rose-500, svg.text-rose-400, svg.text-sky-400 {
+  color: #0369a1 !important;
+}
+svg path, svg circle, svg rect, svg line, svg polyline, svg polygon {
+  stroke: #0369a1 !important;
+}
+/* Inline edit icons and the mobile menu icon: dark sky (delete stays rose on hover) */
+button.inline-icon-btn svg,
+button.inline-icon-btn:hover svg,
+button.inline-icon-btn svg path,
+button.inline-icon-btn:hover svg path,
+button[aria-label="Toggle navigation menu"] svg,
+button[aria-label="Toggle navigation menu"] svg path {
+  color: #0369a1 !important;
+  stroke: #0369a1 !important;
+}
+
+/* Bottom navigation tab icons: keep the tab's own text colour (dark blue active,
+   grey inactive). The generic white button-icon rule would hide them on the
+   white bar. */
+button.bottom-nav-btn svg,
+button.bottom-nav-btn svg path,
+button.bottom-nav-btn svg circle,
+button.bottom-nav-btn svg rect,
+button.bottom-nav-btn svg line,
+button.bottom-nav-btn svg polyline,
+button.bottom-nav-btn svg polygon {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+
+/* 2. HOVERS: light sky for every grey or light hover state */
+[class*="hover:bg-slate"]:hover,
+[class*="hover:bg-rose-50"]:hover {
+  background-color: #bae6fd !important;
+}
+
+/* 3. BUTTONS: filled buttons use dark sky, darker on hover (white text stays readable) */
+button[class~="bg-emerald-500"],
+button[class~="bg-emerald-600"],
+button[class~="bg-sky-500"],
+button[class~="bg-sky-600"],
+button[class~="bg-[#00bbff]"],
+button[class~="bg-[#00BBFF]"] {
+  background-color: #0284c7 !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+button[class~="bg-emerald-500"]:hover,
+button[class~="bg-emerald-600"]:hover,
+button[class~="bg-sky-500"]:hover,
+button[class~="bg-sky-600"]:hover,
+button[class~="bg-[#00bbff]"]:hover,
+button[class~="bg-[#00BBFF]"]:hover {
+  background-color: #0369a1 !important;
+}
+
+/* 4. SELECTED ITEMS: dark sky with white text */
+button[class~="bg-sky-50"],
+button[class~="bg-[#00BBFF]/15"],
+button[class~="bg-[#00BBFF]/5"] {
+  background-color: #0284c7 !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   WHITE TEXT ON DARK BLUE BUTTONS
+   Any button whose background is a dark blue (static or hover)
+   gets white text: its label, inner text and icons.
+   Exact class tokens are used so light tints (e.g. bg-[#00bbff]/10)
+   are not affected.
+   ========================================================= */
+button:is(
+  [class~="bg-[#00bbff]"],
+  [class~="hover:bg-[#00bbff]"],
+  [class~="bg-[#009be0]"],
+  [class~="hover:bg-[#009be0]"],
+  [class~="bg-sky-500"],
+  [class~="bg-sky-600"],
+  [class~="hover:bg-sky-600"],
+  [class~="bg-sky-700"],
+  [class~="hover:bg-sky-700"],
+  [class~="bg-emerald-500"],
+  [class~="bg-emerald-600"],
+  [class~="hover:bg-emerald-600"]
+) {
+  color: #ffffff !important;
+}
+
+button:is(
+  [class~="bg-[#00bbff]"],
+  [class~="hover:bg-[#00bbff]"],
+  [class~="bg-[#009be0]"],
+  [class~="hover:bg-[#009be0]"],
+  [class~="bg-sky-500"],
+  [class~="bg-sky-600"],
+  [class~="hover:bg-sky-600"],
+  [class~="bg-sky-700"],
+  [class~="hover:bg-sky-700"],
+  [class~="bg-emerald-500"],
+  [class~="bg-emerald-600"],
+  [class~="hover:bg-emerald-600"]
+) :is(span, p, svg, svg path) {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* =========================================================
+   WHITE TEXT INSIDE ANY DARK BLUE ELEMENT
+   The previous rule only matched <button> elements. Pills such as
+   the athlete rows on the Leaderboard are <div>s, so this rule
+   covers every element with a dark blue background, and everything
+   inside it (labels, counters, icons).
+   ========================================================= */
+:is(
+  [class~="bg-[#00bbff]"],
+  [class~="hover:bg-[#00bbff]"],
+  [class~="bg-[#009be0]"],
+  [class~="hover:bg-[#009be0]"],
+  [class~="bg-sky-500"],
+  [class~="bg-sky-600"],
+  [class~="hover:bg-sky-600"],
+  [class~="bg-sky-700"],
+  [class~="hover:bg-sky-700"],
+  [class~="bg-emerald-500"],
+  [class~="bg-emerald-600"],
+  [class~="hover:bg-emerald-600"]
+) {
+  color: #ffffff !important;
+}
+
+:is(
+  [class~="bg-[#00bbff]"],
+  [class~="hover:bg-[#00bbff]"],
+  [class~="bg-[#009be0]"],
+  [class~="hover:bg-[#009be0]"],
+  [class~="bg-sky-500"],
+  [class~="bg-sky-600"],
+  [class~="hover:bg-sky-600"],
+  [class~="bg-sky-700"],
+  [class~="hover:bg-sky-700"],
+  [class~="bg-emerald-500"],
+  [class~="bg-emerald-600"],
+  [class~="hover:bg-emerald-600"]
+) * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
